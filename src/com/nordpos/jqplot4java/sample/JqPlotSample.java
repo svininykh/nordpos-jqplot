@@ -21,7 +21,7 @@ import br.com.digilabs.jqplot.chart.AreaChart;
 import br.com.digilabs.jqplot.chart.BarChart;
 import br.com.digilabs.jqplot.chart.LineChart;
 import br.com.digilabs.jqplot.chart.PieChart;
-import br.com.digilabs.jqplot.elements.Serie;
+import com.nordpos.jqplot4java.dao.PeoplePersist;
 import java.util.Arrays;
 
 /**
@@ -56,13 +56,16 @@ public class JqPlotSample {
         barChart.setHighlightMouseDown(true);
 
         barChart.setBarMargin(30);
-        barChart.setTicks("A", "B", "C", "D");
-        barChart.addValue(Arrays.<Integer>asList(200, 600, 700, 1000));
-        barChart.addValue(Arrays.<Integer>asList(200, 600, 700, 1000));
-        barChart.addValue(Arrays.<Integer>asList(200, 600, 700, 1000));
+        barChart.addValue(new PeoplePersist().countUserTickets());
 
+//        barChart.setTicks("A", "B", "C", "D");
+//        barChart.addValue(Arrays.<Integer>asList(200, 600, 700, 1000));
+//        barChart.addValue(Arrays.<Integer>asList(200, 600, 700, 1000));
+//        barChart.addValue(Arrays.<Integer>asList(200, 600, 700, 1000));
         // Texto das Legendas.
-        barChart.addSeries(new Serie("A"), new Serie("B"), new Serie("C"));
+//        barChart.addSeries(new Serie("A"), new Serie("B"), new Serie("C"));
+//        barChart.addSeries(new Serie("A"));
+
         return JqPlotUtils.createJquery(barChart, divId);
     }
 
