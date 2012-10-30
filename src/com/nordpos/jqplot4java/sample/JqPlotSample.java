@@ -17,10 +17,13 @@
 package com.nordpos.jqplot4java.sample;
 
 import br.com.digilabs.jqplot.JqPlotUtils;
+import br.com.digilabs.jqplot.axis.Axis;
+import br.com.digilabs.jqplot.axis.YAxis;
 import br.com.digilabs.jqplot.chart.AreaChart;
 import br.com.digilabs.jqplot.chart.BarChart;
 import br.com.digilabs.jqplot.chart.LineChart;
 import br.com.digilabs.jqplot.chart.PieChart;
+import br.com.digilabs.jqplot.elements.Axes;
 import com.nordpos.jqplot4java.dao.PeoplePersist;
 import com.nordpos.jqplot4java.model.People;
 import java.util.Arrays;
@@ -52,13 +55,19 @@ public class JqPlotSample {
         BarChart<Integer> barChart;
         barChart = new BarChart<Integer>("Bar Chart");
 
-        barChart.setPadMin(1.05f);
+        barChart.setPadMin(1f);
         barChart.setStackSeries(true);
         barChart.setCaptureRightClick(true);
         barChart.setHighlightMouseDown(true);
 
         barChart.setBarMargin(30);
         barChart.addValue(new PeoplePersist().countUserTickets());
+
+        barChart.setLabelX("Users");
+        
+        barChart.setLabelY("Tickets");
+        barChart.getChartConfiguration().getAxes().getYaxis().setMin("");
+        barChart.getChartConfiguration().getAxes().getYaxis().setMax("20");
 
 //        barChart.setTicks("A", "B", "C", "D");
 //        barChart.addValue(Arrays.<Integer>asList(200, 600, 700, 1000));
