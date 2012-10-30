@@ -22,7 +22,9 @@ import br.com.digilabs.jqplot.chart.BarChart;
 import br.com.digilabs.jqplot.chart.LineChart;
 import br.com.digilabs.jqplot.chart.PieChart;
 import com.nordpos.jqplot4java.dao.PeoplePersist;
+import com.nordpos.jqplot4java.model.People;
 import java.util.Arrays;
+import java.util.Iterator;
 
 /**
  *
@@ -70,10 +72,15 @@ public class JqPlotSample {
     }
 
     public static String pieChart(String divId) {
-        PieChart<Number> pizzaChart = new PieChart<Number>("Pizza Chart");
-        pizzaChart.addValue("Drops", 10f);
-        pizzaChart.addValue("Chocolate", 20f);
-        pizzaChart.addValue("Jujuba", 5f);
+        PeoplePersist peopleDao = new PeoplePersist();
+        PieChart<Integer> pizzaChart = new PieChart<Integer>("Pizza Chart");
+
+        Iterator ticketsSales = peopleDao.readUserTickets();
+        while (ticketsSales.hasNext()) {
+            People currentUser = (People) ticketsSales.next();
+            pizzaChart.addValue(currentUser.getName(), currentUser.getTicketsSales());
+        }
+
         return JqPlotUtils.createJquery(pizzaChart, divId);
     }
 }

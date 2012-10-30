@@ -16,6 +16,7 @@
 package com.nordpos.jqplot4java.dao;
 
 import com.nordpos.jqplot4java.model.People;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -57,5 +58,15 @@ public class PeoplePersist extends BaseJDBCPersist {
                 + "FROM PEOPLE "
                 + "LEFT OUTER JOIN TICKETS ON TICKETS.PERSON = PEOPLE.ID "
                 + "GROUP BY PEOPLE.NAME");
+    }
+
+    public Iterator readUserTickets() {
+        return persist.readIterator(People.class,
+                "SELECT PEOPLE.NAME, "
+                + "COUNT(TICKETS.TICKETID) AS TICKETSSALES "
+                + "FROM PEOPLE "
+                + "LEFT OUTER JOIN TICKETS ON TICKETS.PERSON = PEOPLE.ID "
+                + "GROUP BY PEOPLE.NAME "
+                + "ORDER BY PEOPLE.NAME");
     }
 }

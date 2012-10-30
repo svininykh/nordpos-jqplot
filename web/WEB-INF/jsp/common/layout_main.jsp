@@ -70,10 +70,6 @@
 
                 $(document).ready(function () {
 
-                <%=JqPlotSample.lineChart("lineChart")%>
-
-                <%=JqPlotSample.areaChart("areaChart")%>
-
                 <%=JqPlotSample.barChart("barChart")%>
 
                 <%=JqPlotSample.pieChart("pieChart")%>

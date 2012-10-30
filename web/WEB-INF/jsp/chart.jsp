@@ -4,10 +4,8 @@
                        pageid="chart">
 
     <stripes:layout-component name="content">
-            <div id="lineChart" style="margin-top:20px; margin-left:20px; width:600px; height:200px;"></div>
-            <div id="areaChart" style="margin-top:20px; margin-left:20px; width:600px; height:200px;"></div>
-            <div id="barChart" style="margin-top:20px; margin-left:20px; width:600px; height:200px;"></div>
-            <div id="pieChart" style="margin-top:20px; margin-left:20px; width:600px; height:200px;"></div>
+            <div id="barChart" style="margin-top:20px; margin-left:20px; width:400px; height:300px;"></div>
+            <div id="pieChart" style="margin-top:20px; margin-left:20px; width:400px; height:300px;"></div>
     </stripes:layout-component>
 
 </stripes:layout-render>

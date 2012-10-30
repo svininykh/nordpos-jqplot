@@ -16,10 +16,13 @@
 
 package com.nordpos.jqplot4java.model;
 
+import net.sf.persist.annotations.NoTable;
+
 /**
  *
  * @author Andrey Svininykh <svininykh@gmail.com>
  */
+@NoTable
 public class People {
 
     private String id;
@@ -29,6 +32,7 @@ public class People {
     private String role;
     private Boolean visible;
     private Byte[] image;
+    private Integer ticketssales;
 
     public String getId() {
         return id;
@@ -84,5 +88,13 @@ public class People {
 
     public void setImage(Byte[] image) {
         this.image = image;
+    }
+
+    public Integer getTicketsSales() {
+        return ticketssales;
+    }
+
+    public void setTicketsSales(Integer ticketssales) {
+        this.ticketssales = ticketssales;
     }
 }
