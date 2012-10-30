@@ -18,16 +18,24 @@ package com.nordpos.jqplot4java.sample;
 
 import br.com.digilabs.jqplot.JqPlotUtils;
 import br.com.digilabs.jqplot.axis.Axis;
+import br.com.digilabs.jqplot.axis.XAxis;
 import br.com.digilabs.jqplot.axis.YAxis;
 import br.com.digilabs.jqplot.chart.AreaChart;
 import br.com.digilabs.jqplot.chart.BarChart;
 import br.com.digilabs.jqplot.chart.LineChart;
 import br.com.digilabs.jqplot.chart.PieChart;
 import br.com.digilabs.jqplot.elements.Axes;
+import br.com.digilabs.jqplot.elements.TickOptions;
 import com.nordpos.jqplot4java.dao.PeoplePersist;
 import com.nordpos.jqplot4java.model.People;
+import java.util.AbstractCollection;
+import java.util.AbstractList;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 /**
  *
@@ -55,27 +63,31 @@ public class JqPlotSample {
         BarChart<Integer> barChart;
         barChart = new BarChart<Integer>("Bar Chart");
 
+        PeoplePersist peopleDao = new PeoplePersist();
+        Iterator ticketsSales = peopleDao.readUserTickets();
+        List<String> namesList = new ArrayList<String>();
+        List<Integer> ticketsList = new ArrayList<Integer>();
+
+        while (ticketsSales.hasNext()) {
+            People currentUser = (People) ticketsSales.next();
+            namesList.add(currentUser.getName());
+            ticketsList.add(currentUser.getTicketsSales());
+        }
+
+        barChart.setTicks(namesList.toArray(new String[0]));
+        barChart.addValue(ticketsList);
+
         barChart.setPadMin(1f);
         barChart.setStackSeries(true);
         barChart.setCaptureRightClick(true);
         barChart.setHighlightMouseDown(true);
 
         barChart.setBarMargin(30);
-        barChart.addValue(new PeoplePersist().countUserTickets());
 
         barChart.setLabelX("Users");
-        
         barChart.setLabelY("Tickets");
         barChart.getChartConfiguration().getAxes().getYaxis().setMin("");
         barChart.getChartConfiguration().getAxes().getYaxis().setMax("20");
-
-//        barChart.setTicks("A", "B", "C", "D");
-//        barChart.addValue(Arrays.<Integer>asList(200, 600, 700, 1000));
-//        barChart.addValue(Arrays.<Integer>asList(200, 600, 700, 1000));
-//        barChart.addValue(Arrays.<Integer>asList(200, 600, 700, 1000));
-        // Texto das Legendas.
-//        barChart.addSeries(new Serie("A"), new Serie("B"), new Serie("C"));
-//        barChart.addSeries(new Serie("A"));
 
         return JqPlotUtils.createJquery(barChart, divId);
     }
